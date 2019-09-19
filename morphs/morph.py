@@ -10,5 +10,5 @@ class Morph():
         return [self.energy, self.repThresh, self.uniqueId, self.colourId, self.formidabilityIndex]
 
     def makeChoice(self, target):
-        return 0
+        return 
     
