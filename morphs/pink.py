@@ -1,5 +1,5 @@
 from .morph import Morph
 
-class RedMorph(Morph):
+class PinkMorph(Morph):
     def makeChoice(self, target):
-        return 0
+        return 1

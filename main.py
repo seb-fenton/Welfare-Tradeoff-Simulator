@@ -1,29 +1,54 @@
-#imports
 from .graphing.xybasic import BasicGraph
+from .graphing.xycumulative import CumulativeGraph
+from .environment import Game
+from .config import * 
 
 if __name__ == "__main__":
+
+    #TODO:- take input args to toggle debug mode
 
     #reads file to list so that indexing is easy
     filename = 'config.txt'
     fileList = []
-    with open(filename) as f_obj:
-        for line in f_obj:
-            fileList.append(line)
+    try:      
+        with open(filename) as f_obj:
+            for line in f_obj:
+                fileList.append(line)
+    except FileNotFoundError:
+        msg = "Can't find file {0}.".format(filename)
+        print(msg)
+        exit
 
-    #initialise config variables
-    config = []
+    print("\nFile read succesful...")
 
-    totalEnergy = fileList[2]
-    config.append(totalEnergy)
+    try:
+        #config is all information a single game requires
+        config = Config(fileList)
 
-    totalTurns = fileList[4]
-    config.append(totalTurns)
+        #metaConfig is the information required to run several games in a row
+        metaconfig = MetaConfig(fileList)
+        if(metaconfig.totalGames > 1): cumulative = CumulativeGraph()
 
-    indivEnergy = fileList[6]
-    config.append(indivEnergy)
+    except IndexError:
+        print("\nIssue with config file. Exiting program...\n")
+        exit
 
-    tax = fileList[8]
-    config.append(tax)
-
+    for x in range(1, metaconfig.totalGames):
+        game = Game(config)
+        results = Game.run()
+        if metaconfig.plotIndiv == 1:
+            graph = BasicGraph(results)
+            graph.plotResults()
+            if(metaconfig.savePlots == 1): graph.saveResults(metaconfig.plotDirectory)
+        if metaconfig.totalGames > 1:
+            cumulative.addGame(results, x)
+            updateConfig(config, metaconfig)
     
-    
+    cumulative.plotResults()
+    if(metaconfig.savePlots == 1): cumulative.saveResults(metaconfig.plotDirectory)
+    print("\nExecution succesful. Deallocating memory and exiting program...\n")
+
+#defined as separate function for clarity in case of extension
+def updateConfig(config, metaconfig):
+    config.totalPopulation += metaconfig.popIncrement
+    config.totalTurns += metaconfig.turnIncrement

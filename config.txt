@@ -1,12 +1,43 @@
 Welcome to the configuration file for the Welfare Tradeoff Simulator. Please only modify the numbers below, and keep line numbers the same.
-Total population:
+
+Starting total population:
 100
-Total turns:
+Starting total turns:
 100
 Standard individual energy:
 6
-Standard reproduction threshold:
-12
 Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy will be taken per morph per turn):
 4
+Take formidability into account? (1 for yes, 0 for no):
+0
+Number of reds:
+20
+Number of blues:
+20
+Number of greens:
+20
+Number of pinks:
+20
+Number of yellows:
+20
+Number of whites:
+0
+Number of blacks:
+0
+Total games:
+10
+Population increment per game:
+25
+Turns increment per game:
+10
+Plot individual games? (1 for yes, 0 for no):
+0
+Standard reproduction threshold:
+12
+Save plots to directory? (1 for yes, 0 for no):
+1
+Save plots to which directory?: 
+plots
+
+
 
