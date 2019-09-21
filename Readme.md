@@ -1,5 +1,4 @@
 Todos:
--finish subfunctions in game (logical overall flow is there though)
 -deal with plots
 -code morph interaction rules
 -make sure formidability consistent

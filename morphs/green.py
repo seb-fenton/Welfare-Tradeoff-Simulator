@@ -1,4 +1,5 @@
 from .morph import Morph
+import random
 
 class GreenMorph(Morph):
     def __init__(self, energy, repThresh, uniqueId, colourId, formidabilityIndex):
@@ -10,9 +11,11 @@ class GreenMorph(Morph):
         self.actionMemory = {}
 
     def makeChoice(self, target, config):
-        return 0
+        for i in range(0, len(self.actionMemory)-1):
+            if i in self.actionMemory:
+                return self.actionMemory[i]
+            else: return random.randint(0,1)
 
     def rememberAction(self, target, action):
         actionMemory[target.getUniqueId()] = action
         return
-        #use a dictionary for this?

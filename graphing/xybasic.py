@@ -5,7 +5,7 @@ class BasicGraph():
         self.results = results
         return
     
-    def plotResults(self, config):
+    def plotResults(self, config, savePlots, plotDirectory):
         xVals = []
 
         yValsEnergyRed = []
@@ -54,15 +54,16 @@ class BasicGraph():
             yValsPopBlack.append(self.results[x][1][config.colourMapping['black']])
 
 
-        """plt.plot(xVals, yValsEnergyRed, color = 'r')
+        plt.plot(xVals, yValsEnergyRed, color = 'r')
         plt.plot(xVals, yValsEnergyBlue, color = 'b')
         plt.plot(xVals, yValsEnergyGreen, color = 'g')
         plt.plot(xVals, yValsEnergyPink, color = 'm')
         plt.plot(xVals, yValsEnergyYellow, color = 'y')
         plt.plot(xVals, yValsEnergyWhite, color = 'w')
-        plt.plot(xVals, yValsEnergyBlack, color = 'k')"""
+        plt.plot(xVals, yValsEnergyBlack, color = 'k')
 
-        #plt.show()
+        plt.show()
+        if(savePlots == 1): plt.save(plotDirectory)
 
         plt.plot(xVals, yValsPopRed, color = 'r')
         plt.plot(xVals, yValsPopBlue, color = 'b')
@@ -73,13 +74,6 @@ class BasicGraph():
         plt.plot(xVals, yValsPopBlack, color = 'k')
 
         plt.show()
+        if(savePlots == 1): plt.save(plotDirectory)
 
-
-
-
-
-
-        return
-
-    def saveResults(self, directory):
         return

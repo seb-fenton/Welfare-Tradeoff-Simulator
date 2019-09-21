@@ -42,8 +42,7 @@ def main():
 
         if metaconfig.plotIndiv == 1:
             graph = BasicGraph(results)
-            graph.plotResults(config)
-            if(metaconfig.savePlots == 1): graph.saveResults(metaconfig.plotDirectory)
+            graph.plotResults(config, metaconfig.savePlots, metaconfig.plotDirectory)
 
         if metaconfig.totalGames > 1:
             cumulative.addGame(results, x)
