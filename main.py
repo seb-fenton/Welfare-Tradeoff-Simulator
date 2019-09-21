@@ -1,9 +1,10 @@
-from .graphing.xybasic import BasicGraph
-from .graphing.xycumulative import CumulativeGraph
-from .environment import Game
-from .config import * 
+from graphing.xybasic import BasicGraph
+from graphing.xycumulative import CumulativeGraph
+from environment.game import Game
+from config import Config, MetaConfig
 
-if __name__ == "__main__":
+
+def main():
 
     #TODO:- take input args to toggle debug mode
 
@@ -32,19 +33,23 @@ if __name__ == "__main__":
     except IndexError:
         print("\nIssue with config file. Exiting program...\n")
         exit
+    
+    for x in range(1, metaconfig.totalGames+1):
+        population = []
+        game = Game(config, 0, population)
+        game.initialMorphGen(config)
+        results = game.run(config)
 
-    for x in range(1, metaconfig.totalGames):
-        game = Game(config)
-        results = Game.run()
         if metaconfig.plotIndiv == 1:
             graph = BasicGraph(results)
-            graph.plotResults()
+            graph.plotResults(config)
             if(metaconfig.savePlots == 1): graph.saveResults(metaconfig.plotDirectory)
+
         if metaconfig.totalGames > 1:
             cumulative.addGame(results, x)
             updateConfig(config, metaconfig)
     
-    cumulative.plotResults()
+    #cumulative.plotResults()
     if(metaconfig.savePlots == 1): cumulative.saveResults(metaconfig.plotDirectory)
     print("\nExecution succesful. Deallocating memory and exiting program...\n")
 
@@ -52,3 +57,8 @@ if __name__ == "__main__":
 def updateConfig(config, metaconfig):
     config.totalPopulation += metaconfig.popIncrement
     config.totalTurns += metaconfig.turnIncrement
+
+
+
+if __name__ == "__main__":
+    main()

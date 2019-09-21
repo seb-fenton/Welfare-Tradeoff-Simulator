@@ -9,7 +9,7 @@ class GreenMorph(Morph):
         self.formidabilityIndex = formidabilityIndex
         self.actionMemory = {}
 
-    def makeChoice(self, target):
+    def makeChoice(self, target, config):
         return 0
 
     def rememberAction(self, target, action):

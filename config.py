@@ -1,9 +1,10 @@
 class Config():
     def __init__(self, fileList):
         self.colourMapping = {'red': 0, 'blue': 1, 'green': 2, 'pink': 3, 'yellow': 4, 'white': 5, 'black': 6}
+        self.indexMapping = {0: 'red', 1: 'blue', 2: 'green', 3: 'pink', 4: 'yellow', 5: 'white', 6: 'black'}
         self.formidMapping = {'red': 0, 'blue': 1, 'green': 2, 'pink': 3, 'yellow': 4, 'white': 5, 'black': 6}
         
-        #TODO:- strip whitespace & convert all these strings to numericals
+        #TODO:- rework to use split so it's less cancer
         self.totalPopulation = int(fileList[2].rstrip(), 10)
 
         self.totalTurns = int(fileList[4].rstrip(), 10)
@@ -29,6 +30,11 @@ class Config():
         self.blackPop = int(fileList[24].rstrip(), 10)
 
         self.repThresh = int(fileList[34].rstrip(), 10)
+
+        self.selfishReward = int(fileList[40].rstrip(), 10)
+
+        self.selflessReward = int(fileList[42].rstrip(), 10)
+
 
 class MetaConfig():
     def __init__(self, fileList):

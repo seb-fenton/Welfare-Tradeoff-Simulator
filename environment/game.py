@@ -1,91 +1,127 @@
-from ..morphs.red import RedMorph
-from ..morphs.blue import BlueMorph
-from ..morphs.green import GreenMorph
-from ..morphs.pink import PinkMorph
-from ..morphs.yellow import YellowMorph
-from ..morphs.white import WhiteMorph
-from ..morphs.black import BlackMorph
-from ..config import *
+from morphs.red import RedMorph
+from morphs.blue import BlueMorph
+from morphs.green import GreenMorph
+from morphs.pink import PinkMorph
+from morphs.yellow import YellowMorph
+from morphs.white import WhiteMorph
+from morphs.black import BlackMorph
+from config import Config, MetaConfig
+import random
 
 class Game():
-    def __init__(self, config):
-        self.uniqueId = 0
+    def __init__(self, config, uniqueId, population):
+        self.uniqueId = uniqueId
+        self.population = population
 
-        #generate morphs
-        self.population = []
-
-        #this is probably very inefficient but I'm not a python guru so idk
+    #this is a separate function because it was shitting itself & I'm not a good enough python coder to bother working out what was going wrong
+    def initialMorphGen(self, config):
         for x in range(0, config.redPop):
-            newMorph = RedMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['red'], config.formidMapping['red'])
-            population.append(newMorph)
+            newMorph = RedMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['red'], config.formidMapping['red'])
+            self.population.append(newMorph)
+            self.uniqueId += 1
 
         for x in range(0, config.bluePop):
-            newMorph = BlueMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['blue'], config.formidMapping['blue'])
-            population.append(newMorph)
+            newMorph = BlueMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['blue'], config.formidMapping['blue'])
+            self.population.append(newMorph)
+            self.uniqueId += 1
 
         for x in range(0, config.greenPop):
-            newMorph = GreenMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['green'], config.formidMapping['green'])
-            population.append(newMorph)
+            newMorph = GreenMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['green'], config.formidMapping['green'])
+            self.population.append(newMorph)
+            self.uniqueId += 1
 
         for x in range(0, config.pinkPop):
-            newMorph = PinkMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['pink'], config.formidMapping['pink'])
-            population.append(newMorph)
+            newMorph = PinkMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['pink'], config.formidMapping['pink'])
+            self.population.append(newMorph)
+            self.uniqueId += 1
 
         for x in range(0, config.yellowPop):
-            newMorph = YellowMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['yellow'], config.formidMapping['yellow'])
-            population.append(newMorph)
+            newMorph = YellowMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['yellow'], config.formidMapping['yellow'])
+            self.population.append(newMorph)
+            self.uniqueId += 1
 
         for x in range(0, config.whitePop):
-            newMorph = WhiteMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['white'], config.formidMapping['white'])
-            population.append(newMorph)
+            newMorph = WhiteMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['white'], config.formidMapping['white'])
+            self.population.append(newMorph)
+            self.uniqueId += 1
 
         for x in range(0, config.blackPop):
-            newMorph = BlackMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['black'], config.formidMapping['black'])
-            population.append(newMorph)
+            newMorph = BlackMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['black'], config.formidMapping['black'])
+            self.population.append(newMorph)
+            self.uniqueId += 1
 
     def run(self, config):
         results = []
         for x in range(1,config.totalTurns):
-            self.popShuffle()
-            self.morphChoices()
-            results.append(self.generateStats())
+            random.shuffle(self.population)
+            self.morphModification(config)
+            results.append(self.generateStats(config))
         return results
 
-    def morphChoices(self, config):
-        #TODO:- make this ternary operator
+    def morphModification(self, config):
         #toggle guarantees no issues for odd population, just leaves first morph in list alone
-        toggle = 1
-        if(config.totalPopulation % 2 == 1): toggle = 2
+        toggle = 0
+        if(config.totalPopulation % 2 == 1): toggle = 1
 
         reproduction = []
         death = []
 
-        for x in range(toggle, config.totalPopulation):
-            population[x].makeChoice(population[x+1])
+        for x in range(0, len(self.population)-toggle-1, 2):
+            #choice
+            choice = self.population[x].makeChoice(self.population[x+1], config)
+            if(choice == 0): self.population[x].addEnergy(config.selfishReward)
+            elif(choice == 1): self.population[x+1].addEnergy(config.selflessReward)
+
+            #tax
+            self.population[x].removeEnergy(config.tax)
+            self.population[x+1].removeEnergy(config.tax)
+
             #checkChange checks for reproduction/death
+            if(self.population[x].checkChange() == 1): reproduction.append(x)
+            elif(self.population[x].checkChange() == 2): death.append(x)
 
-            if(population[x].checkChange() == 1): reproduction.append(x)
-            elif(population[x].checkChange() == 2): death.append(x)
-
-            if(population[x+1].checkChange() == 1): reproduction.append(x+1)
-            elif(population[x+1].checkChange() == 2): death.append(x)
-            x+=1
+            if(self.population[x+1].checkChange() == 1): reproduction.append(x+1)
+            elif(self.population[x+1].checkChange() == 2): death.append(x)
         
-        self.consolate(population, reproduction, death)
+        self.consolate(reproduction, death, config)
 
-    def consolate(self, population, reproduction, death):
+    def consolate(self, reproduction, death, config):
+        #done before death so that indices don't screw up
+        for x in reproduction:
+            self.population[x].removeEnergy(config.tax)
+            newMorph = self.genMorph(self.population[x].getColour(), config)
+            self.population.append(newMorph)
+
+        #goes backwards so that indices don't screw up
+        for x in sorted(death, reverse=True):
+            del self.population[x]
+
         return
 
-    def generateStats(self, population):
-        return
+    def genMorph(self, colour, config):
+        colourName = config.indexMapping[colour]
+        if(colourName == 'red'): newMorph = RedMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['red'], config.formidMapping['red'])
+        elif(colourName == 'blue'): newMorph = BlueMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['blue'], config.formidMapping['blue'])
+        elif(colourName == 'green'): newMorph = GreenMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['green'], config.formidMapping['green'])
+        elif(colourName == 'pink'): newMorph = PinkMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['pink'], config.formidMapping['pink'])
+        elif(colourName == 'yellow'): newMorph = YellowMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['yellow'], config.formidMapping['yellow'])
+        elif(colourName == 'white'): newMorph = WhiteMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['white'], config.formidMapping['white'])
+        elif(colourName == 'black'): newMorph = BlackMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['black'], config.formidMapping['black'])
+        return newMorph
 
-    def popShuffle(self):
-        #TODO:- self.pop.randomshuffle, somehow
-        return
+    def generateStats(self, config):
+        energyStats = [0] * len(config.colourMapping)
+        popStats = [0] * len(config.colourMapping)
+        for x in range(0, len(self.population)): 
+            colour = self.population[x].getColour()
+            energyStats[colour] += self.population[x].getEnergy()
+            popStats[colour] += 1
+        results = [energyStats, popStats]
+        return results
 
     def idGen(self):
-        uniqueId += 1
-        return uniqueId
+        self.uniqueId += 1
+        return self.uniqueId
         
 
 
