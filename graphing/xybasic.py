@@ -54,15 +54,28 @@ class BasicGraph():
             yValsPopBlack.append(self.results[x][1][config.colourMapping['black']])
 
 
-        plt.plot(xVals, yValsEnergyRed, color = 'r')
+        """plt.plot(xVals, yValsEnergyRed, color = 'r')
         plt.plot(xVals, yValsEnergyBlue, color = 'b')
         plt.plot(xVals, yValsEnergyGreen, color = 'g')
         plt.plot(xVals, yValsEnergyPink, color = 'm')
         plt.plot(xVals, yValsEnergyYellow, color = 'y')
         plt.plot(xVals, yValsEnergyWhite, color = 'w')
-        plt.plot(xVals, yValsEnergyBlack, color = 'k')
+        plt.plot(xVals, yValsEnergyBlack, color = 'k')"""
+
+        #plt.show()
+
+        plt.plot(xVals, yValsPopRed, color = 'r')
+        plt.plot(xVals, yValsPopBlue, color = 'b')
+        plt.plot(xVals, yValsPopGreen, color = 'g')
+        plt.plot(xVals, yValsPopPink, color = 'm')
+        plt.plot(xVals, yValsPopYellow, color = 'y')
+        plt.plot(xVals, yValsPopWhite, color = 'w')
+        plt.plot(xVals, yValsPopBlack, color = 'k')
 
         plt.show()
+
+
+
 
 
 

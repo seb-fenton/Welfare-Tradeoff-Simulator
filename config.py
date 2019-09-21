@@ -9,9 +9,9 @@ class Config():
 
         self.totalTurns = int(fileList[4].rstrip(), 10)
 
-        self.indivEnergy = int(fileList[6].rstrip(), 10)
+        self.indivEnergy = float(fileList[6].rstrip())
 
-        self.tax = int(fileList[8].rstrip(), 10)
+        self.tax = float(fileList[8].rstrip())
 
         self.formidabilityToggle = int(fileList[10].rstrip(), 10)
 
@@ -29,11 +29,11 @@ class Config():
 
         self.blackPop = int(fileList[24].rstrip(), 10)
 
-        self.repThresh = int(fileList[34].rstrip(), 10)
+        self.repThresh = float(fileList[34].rstrip())
 
-        self.selfishReward = int(fileList[40].rstrip(), 10)
+        self.selfishReward = float(fileList[40].rstrip())
 
-        self.selflessReward = int(fileList[42].rstrip(), 10)
+        self.selflessReward = float(fileList[42].rstrip())
 
 
 class MetaConfig():

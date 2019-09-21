@@ -53,6 +53,7 @@ class Game():
     def run(self, config):
         results = []
         for x in range(1,config.totalTurns):
+            print("Turn: ", x, "\n")
             random.shuffle(self.population)
             self.morphModification(config)
             results.append(self.generateStats(config))
@@ -112,6 +113,7 @@ class Game():
     def generateStats(self, config):
         energyStats = [0] * len(config.colourMapping)
         popStats = [0] * len(config.colourMapping)
+
         for x in range(0, len(self.population)): 
             colour = self.population[x].getColour()
             energyStats[colour] += self.population[x].getEnergy()

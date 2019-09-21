@@ -6,7 +6,7 @@ Starting total turns:
 Standard individual energy:
 6
 Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy will be taken per morph per turn):
-3
+2.5
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
