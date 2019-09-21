@@ -10,15 +10,15 @@ Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy 
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
-20
+50
 Number of blues:
-20
+50
 Number of greens:
-20
+100
 Number of pinks:
-20
+50
 Number of yellows:
-20
+50
 Number of whites:
 0
 Number of blacks:
@@ -34,9 +34,9 @@ Plot individual games? (1 for yes, 0 for no):
 Standard reproduction threshold:
 12
 Save plots to directory? (1 for yes, 0 for no):
-0
-Save plots to which directory?: 
-plots
+1
+Save plots to which directory?(not currently using this): 
+plots/
 Selfish reward:
 4
 Selfless reward:

@@ -45,19 +45,17 @@ def main():
             graph.plotResults(config, metaconfig.savePlots, metaconfig.plotDirectory)
 
         if metaconfig.totalGames > 1:
-            cumulative.addGame(results, x)
+            #cumulative.addGame(results, x)
             updateConfig(config, metaconfig)
     
     #cumulative.plotResults()
-    if(metaconfig.savePlots == 1): cumulative.saveResults(metaconfig.plotDirectory)
+    #if(metaconfig.savePlots == 1): cumulative.saveResults(metaconfig.plotDirectory)
     print("\nExecution succesful. Deallocating memory and exiting program...\n")
 
 #defined as separate function for clarity in case of extension
 def updateConfig(config, metaconfig):
     config.totalPopulation += metaconfig.popIncrement
     config.totalTurns += metaconfig.turnIncrement
-
-
 
 if __name__ == "__main__":
     main()

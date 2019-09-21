@@ -53,7 +53,7 @@ class Game():
     def run(self, config):
         results = []
         for x in range(1,config.totalTurns):
-            print("Turn: ", x, "\n")
+            print("Turn: ", x)
             random.shuffle(self.population)
             self.morphModification(config)
             results.append(self.generateStats(config))
@@ -69,20 +69,33 @@ class Game():
 
         for x in range(0, len(self.population)-toggle-1, 2):
             #choice
+            #print("Start of Turn: \nActor: ", self.population[x].getColour(), "C ", self.population[x].getEnergy(), "H\n")
+            #print("Actee: ", self.population[x+1].getColour(), "C ", self.population[x+1].getEnergy(), "\n")
+
             choice = self.population[x].makeChoice(self.population[x+1], config)
             if(choice == 0): self.population[x].addEnergy(config.selfishReward)
             elif(choice == 1): self.population[x+1].addEnergy(config.selflessReward)
+
+            #print("Choice: ", choice, " | Actor: ", self.population[x].getColour(), " | Actee: ", self.population[x+1].getColour())
 
             #tax
             self.population[x].removeEnergy(config.tax)
             self.population[x+1].removeEnergy(config.tax)
 
+            #print("End of turn: \nActor: ", self.population[x].getColour(), "C ", self.population[x].getEnergy(), "\n")
+            #print("Actee: ", self.population[x+1].getColour(), "C ", self.population[x+1].getEnergy(), "\n")
+
             #checkChange checks for reproduction/death
             if(self.population[x].checkChange() == 1): reproduction.append(x)
             elif(self.population[x].checkChange() == 2): death.append(x)
 
+            #print("Actor checkchange: ", self.population[x].checkChange(), "\n")
+
             if(self.population[x+1].checkChange() == 1): reproduction.append(x+1)
             elif(self.population[x+1].checkChange() == 2): death.append(x)
+
+            #print("Actee checkchange: ", self.population[x+1].checkChange(), "\n")
+
         
         self.consolate(reproduction, death, config)
 

@@ -1,9 +1,14 @@
-Todos:
--deal with plots
--code morph interaction rules
--make sure formidability consistent
--green, white, black still not finished
+When modifying the config file, do not change order or line number.
 
+
+Planned features:
+
+-cumulative plots
+-save plots
+-formidability
+-black
+-white
+-rework config.txt to work on .split()
 
 
 Adding new morphs

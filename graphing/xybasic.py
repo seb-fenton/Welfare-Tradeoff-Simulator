@@ -41,11 +41,11 @@ class BasicGraph():
             yValsEnergyGreen.append(self.results[x][0][config.colourMapping['green']])
             yValsPopGreen.append(self.results[x][1][config.colourMapping['green']])
 
-            yValsEnergyYellow.append(self.results[x][0][config.colourMapping['pink']])
-            yValsPopYellow.append(self.results[x][1][config.colourMapping['pink']])
+            yValsEnergyYellow.append(self.results[x][0][config.colourMapping['yellow']])
+            yValsPopYellow.append(self.results[x][1][config.colourMapping['yellow']])
 
-            yValsEnergyPink.append(self.results[x][0][config.colourMapping['yellow']])
-            yValsPopPink.append(self.results[x][1][config.colourMapping['yellow']])
+            yValsEnergyPink.append(self.results[x][0][config.colourMapping['pink']])
+            yValsPopPink.append(self.results[x][1][config.colourMapping['pink']])
 
             yValsEnergyWhite.append(self.results[x][0][config.colourMapping['white']])
             yValsPopWhite.append(self.results[x][1][config.colourMapping['white']])
@@ -62,8 +62,13 @@ class BasicGraph():
         plt.plot(xVals, yValsEnergyWhite, color = 'w')
         plt.plot(xVals, yValsEnergyBlack, color = 'k')
 
+        plt.title("Energy of Morphs by turn", fontsize=12)
+        plt.xlabel("Turns", fontsize=12)
+        plt.ylabel("Energy", fontsize=12)
+        plt.tick_params(axis='both', which='major', labelsize=12)
+
+        if(savePlots == 1): plt.savefig('plots/energy')
         plt.show()
-        if(savePlots == 1): plt.save(plotDirectory)
 
         plt.plot(xVals, yValsPopRed, color = 'r')
         plt.plot(xVals, yValsPopBlue, color = 'b')
@@ -73,7 +78,12 @@ class BasicGraph():
         plt.plot(xVals, yValsPopWhite, color = 'w')
         plt.plot(xVals, yValsPopBlack, color = 'k')
 
+        plt.title("Population of Morphs by turn", fontsize=12)
+        plt.xlabel("Turns", fontsize=12)
+        plt.ylabel("Population", fontsize=12)
+        plt.tick_params(axis='both', which='major', labelsize=12)
+        
+        if(savePlots == 1): plt.savefig('plots/pop')
         plt.show()
-        if(savePlots == 1): plt.save(plotDirectory)
 
         return

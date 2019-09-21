@@ -32,6 +32,6 @@ class Morph():
         return
 
     def addEnergy(self, modifier):
-        self.energy += modifier
+        self.energy = self.energy + modifier
         return
     
