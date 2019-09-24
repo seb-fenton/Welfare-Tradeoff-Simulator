@@ -25,6 +25,7 @@ def main():
     try:
         #config is all information a single game requires
         config = Config(fileList)
+        config.setMappings()
 
         #metaConfig is the information required to run several games in a row
         metaconfig = MetaConfig(fileList)

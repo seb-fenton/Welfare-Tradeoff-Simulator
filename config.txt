@@ -10,17 +10,17 @@ Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy 
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
-50
+10
 Number of blues:
-50
+10
 Number of greens:
-100
+10
 Number of pinks:
-50
+10
 Number of yellows:
-50
+10
 Number of whites:
-0
+10
 Number of blacks:
 0
 Total games:
@@ -41,6 +41,8 @@ Selfish reward:
 4
 Selfless reward:
 6
+Distribute behaviours randomly across colours? (1 for yes, 0 for no):
+0
 
 
 

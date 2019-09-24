@@ -7,8 +7,11 @@ Planned features:
 -save plots
 -formidability
 -black
--white
+-white as variant on green
 -rework config.txt to work on .split()
+-stats of average gain per morph
+-tool to analyse actual gain per morph + choices
+-Random population distribution - colours not being intrinsically liniked
 
 
 Adding new morphs

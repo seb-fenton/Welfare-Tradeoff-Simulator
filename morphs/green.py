@@ -17,5 +17,5 @@ class GreenMorph(Morph):
             else: return random.randint(0,1)
 
     def rememberAction(self, target, action):
-        actionMemory[target.getUniqueId()] = action
+        self.actionMemory[target] = action
         return

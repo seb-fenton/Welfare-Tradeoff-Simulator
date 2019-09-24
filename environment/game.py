@@ -16,36 +16,43 @@ class Game():
     #this is a separate function because it was shitting itself & I'm not a good enough python coder to bother working out what was going wrong
     def initialMorphGen(self, config):
         for x in range(0, config.redPop):
+            config.setMappings()
             newMorph = RedMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['red'], config.formidMapping['red'])
             self.population.append(newMorph)
             self.uniqueId += 1
 
         for x in range(0, config.bluePop):
+            config.setMappings()
             newMorph = BlueMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['blue'], config.formidMapping['blue'])
             self.population.append(newMorph)
             self.uniqueId += 1
 
         for x in range(0, config.greenPop):
+            config.setMappings()
             newMorph = GreenMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['green'], config.formidMapping['green'])
             self.population.append(newMorph)
             self.uniqueId += 1
 
         for x in range(0, config.pinkPop):
+            config.setMappings()
             newMorph = PinkMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['pink'], config.formidMapping['pink'])
             self.population.append(newMorph)
             self.uniqueId += 1
 
         for x in range(0, config.yellowPop):
+            config.setMappings()
             newMorph = YellowMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['yellow'], config.formidMapping['yellow'])
             self.population.append(newMorph)
             self.uniqueId += 1
 
         for x in range(0, config.whitePop):
+            config.setMappings()
             newMorph = WhiteMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['white'], config.formidMapping['white'])
             self.population.append(newMorph)
             self.uniqueId += 1
 
         for x in range(0, config.blackPop):
+            config.setMappings()
             newMorph = BlackMorph(config.indivEnergy, config.repThresh, self.uniqueId, config.colourMapping['black'], config.formidMapping['black'])
             self.population.append(newMorph)
             self.uniqueId += 1
@@ -75,6 +82,9 @@ class Game():
             choice = self.population[x].makeChoice(self.population[x+1], config)
             if(choice == 0): self.population[x].addEnergy(config.selfishReward)
             elif(choice == 1): self.population[x+1].addEnergy(config.selflessReward)
+
+            if(isinstance(self.population[x+1], GreenMorph) | isinstance(self.population[x+1], WhiteMorph)): 
+                self.population[x+1].rememberAction(self.population[x].getUniqueId(), choice)
 
             #print("Choice: ", choice, " | Actor: ", self.population[x].getColour(), " | Actee: ", self.population[x+1].getColour())
 

@@ -1,10 +1,8 @@
+import random
+
 class Config():
     def __init__(self, fileList):
-        self.colourMapping = {'red': 0, 'blue': 1, 'green': 2, 'pink': 3, 'yellow': 4, 'white': 5, 'black': 6}
-        self.indexMapping = {0: 'red', 1: 'blue', 2: 'green', 3: 'pink', 4: 'yellow', 5: 'white', 6: 'black'}
-        self.formidMapping = {'red': 0, 'blue': 1, 'green': 2, 'pink': 3, 'yellow': 4, 'white': 5, 'black': 6}
         
-        #TODO:- rework to use split so it's less cancer
         self.totalPopulation = int(fileList[2].rstrip(), 10)
 
         self.totalTurns = int(fileList[4].rstrip(), 10)
@@ -35,11 +33,26 @@ class Config():
 
         self.selflessReward = float(fileList[42].rstrip())
 
+        self.randomDistrib = int(fileList[44].rstrip())
+
+    def setMappings(self):
+        if(self.randomDistrib == 0):
+            #NORMAL
+            self.colourMapping = {'red': 0, 'blue': 1, 'green': 2, 'pink': 3, 'yellow': 4, 'white': 5, 'black': 6}
+            self.indexMapping = {0: 'red', 1: 'blue', 2: 'green', 3: 'pink', 4: 'yellow', 5: 'white', 6: 'black'}
+            self.formidMapping = {'red': 0, 'blue': 1, 'green': 2, 'pink': 3, 'yellow': 4, 'white': 5, 'black': 6}
+        else:
+            #RANDOMISED
+            randList = [0, 1, 2, 3, 4, 5, 6]
+            random.shuffle(randList)
+            self.colourMapping = {'red': randList[0], 'blue': randList[1], 'green': randList[2], 'pink': randList[3], 'yellow': randList[4], 'white': randList[5], 'black': randList[6]}
+            self.indexMapping = {randList[0]: 'red', randList[1]: 'blue', randList[2]: 'green', randList[3]: 'pink', randList[4]: 'yellow', randList[5]: 'white', randList[6]: 'black'}
+            self.formidMapping = {'red': 0, 'blue': 1, 'green': 2, 'pink': 3, 'yellow': 4, 'white': 5, 'black': 6}
+
 
 class MetaConfig():
     def __init__(self, fileList):
 
-        #TODO:- strip whitespace & convert all these strings to numericals
         self.totalGames = int(fileList[26].rstrip(), 10)
 
         self.popIncrement = int(fileList[28].rstrip(), 10)
