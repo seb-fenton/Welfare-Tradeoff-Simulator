@@ -32,7 +32,7 @@ def main():
         if(metaconfig.totalGames > 1): cumulative = CumulativeGraph()
 
     except IndexError:
-        print("\nIssue with config file. Exiting program...\n")
+        print("\nIssue with config file. Exiting program... \n")
         exit
     
     for x in range(1, metaconfig.totalGames+1):
