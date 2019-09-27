@@ -59,7 +59,7 @@ class BasicGraph():
         plt.plot(xVals, yValsEnergyGreen, color = 'g')
         plt.plot(xVals, yValsEnergyPink, color = 'm')
         plt.plot(xVals, yValsEnergyYellow, color = 'y')
-        plt.plot(xVals, yValsEnergyWhite, color = 'silver')
+        plt.plot(xVals, yValsEnergyWhite, color = 'gray')
         plt.plot(xVals, yValsEnergyBlack, color = 'k')
 
         plt.title("Energy of Morphs by turn", fontsize=12)
@@ -75,7 +75,7 @@ class BasicGraph():
         plt.plot(xVals, yValsPopGreen, color = 'g')
         plt.plot(xVals, yValsPopPink, color = 'm')
         plt.plot(xVals, yValsPopYellow, color = 'y')
-        plt.plot(xVals, yValsPopWhite, color = 'silver')
+        plt.plot(xVals, yValsPopWhite, color = 'gray')
         plt.plot(xVals, yValsPopBlack, color = 'k')
 
         plt.title("Population of Morphs by turn", fontsize=12)

@@ -6,21 +6,21 @@ Starting total turns:
 Standard individual energy:
 6
 Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy will be taken per morph per turn):
-3
+2
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
-10
+0
 Number of blues:
-10
+0
 Number of greens:
-10
+1000
 Number of pinks:
-10
+0
 Number of yellows:
-10
+15
 Number of whites:
-10
+1000
 Number of blacks:
 0
 Total games:
