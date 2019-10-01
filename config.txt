@@ -43,6 +43,8 @@ Selfless reward:
 6
 Distribute behaviours randomly across colours? (1 for yes, 0 for no):
 0
+Probability of mutation (0-100):
+3
 
 
 

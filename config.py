@@ -35,6 +35,8 @@ class Config():
 
         self.randomDistrib = int(fileList[44].rstrip())
 
+        self.mutationChance = float(fileList[46].rstrip())
+
     def setMappings(self):
         if(self.randomDistrib == 0):
             #NORMAL

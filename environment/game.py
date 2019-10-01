@@ -5,6 +5,7 @@ from morphs.pink import PinkMorph
 from morphs.yellow import YellowMorph
 from morphs.white import WhiteMorph
 from morphs.black import BlackMorph
+from morphs.morph import Morph
 from config import Config, MetaConfig
 import random
 
@@ -123,15 +124,42 @@ class Game():
         return
 
     def genMorph(self, colour, config):
-        colourName = config.indexMapping[colour]
-        if(colourName == 'red'): newMorph = RedMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['red'], config.formidMapping['red'])
-        elif(colourName == 'blue'): newMorph = BlueMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['blue'], config.formidMapping['blue'])
-        elif(colourName == 'green'): newMorph = GreenMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['green'], config.formidMapping['green'])
-        elif(colourName == 'pink'): newMorph = PinkMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['pink'], config.formidMapping['pink'])
-        elif(colourName == 'yellow'): newMorph = YellowMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['yellow'], config.formidMapping['yellow'])
-        elif(colourName == 'white'): newMorph = WhiteMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['white'], config.formidMapping['white'])
-        elif(colourName == 'black'): newMorph = BlackMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['black'], config.formidMapping['black'])
-        return newMorph
+
+        mutationCheck = random.randint(1,100)
+        colourName = ''
+
+        #initial check for 0 technically redundant but optimises code
+        if(config.mutationChance == 0): colourName = config.indexMapping[colour]
+        elif(mutationCheck < config.mutationChance):
+            randIndex = random.randint(0, len(config.indexMapping) - 1)
+            colourName = config.indexMapping[randIndex]
+            print(colourName)
+        else: colourName = config.indexMapping[colour]
+
+
+        if(colourName == 'red'): 
+            newMorph = RedMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['red'], config.formidMapping['red'])
+            return newMorph
+        elif(colourName == 'blue'): 
+            newMorph = BlueMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['blue'], config.formidMapping['blue'])
+            return newMorph
+        elif(colourName == 'green'): 
+            newMorph = GreenMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['green'], config.formidMapping['green'])
+            return newMorph
+        elif(colourName == 'pink'): 
+            newMorph = PinkMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['pink'], config.formidMapping['pink'])
+            return newMorph
+        elif(colourName == 'yellow'): 
+            newMorph = YellowMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['yellow'], config.formidMapping['yellow'])
+            return newMorph
+        elif(colourName == 'white'): 
+            newMorph = WhiteMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['white'], config.formidMapping['white'])
+            return newMorph
+        elif(colourName == 'black'): 
+            newMorph = BlackMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['black'], config.formidMapping['black'])
+            return newMorph
+
+        print(colourName)
 
     def generateStats(self, config):
         energyStats = [0] * len(config.colourMapping)
