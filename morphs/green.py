@@ -21,4 +21,5 @@ class GreenMorph(Morph):
 
     def rememberAction(self, target, action):
         self.actionMemory[target] = action
+        print(target, action)
         return

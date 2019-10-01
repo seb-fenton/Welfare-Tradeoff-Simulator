@@ -79,6 +79,7 @@ class Game():
             #choice
             #print("Start of Turn: \nActor: ", self.population[x].getColour(), "C ", self.population[x].getEnergy(), "H\n")
             #print("Actee: ", self.population[x+1].getColour(), "C ", self.population[x+1].getEnergy(), "\n")
+            print(x)
 
             choice = self.population[x].makeChoice(self.population[x+1], config)
             if(choice == 0): self.population[x].addEnergy(config.selfishReward)
@@ -107,6 +108,12 @@ class Game():
 
             #print("Actee checkchange: ", self.population[x+1].checkChange(), "\n")
 
+        if(len(self.population)==1):
+            self.population[0].addEnergy(config.selfishReward)
+            self.population[0].removeEnergy(config.tax)
+            if(self.population[0].checkChange() == 1): reproduction.append(0)
+            elif(self.population[0].checkChange() == 2): death.append(0)
+
         
         self.consolate(reproduction, death, config)
 
@@ -133,7 +140,6 @@ class Game():
         elif(mutationCheck < config.mutationChance):
             randIndex = random.randint(0, len(config.indexMapping) - 1)
             colourName = config.indexMapping[randIndex]
-            print(colourName)
         else: colourName = config.indexMapping[colour]
 
 
@@ -158,8 +164,6 @@ class Game():
         elif(colourName == 'black'): 
             newMorph = BlackMorph(config.indivEnergy, config.repThresh, self.idGen(), config.colourMapping['black'], config.formidMapping['black'])
             return newMorph
-
-        print(colourName)
 
     def generateStats(self, config):
         energyStats = [0] * len(config.colourMapping)
