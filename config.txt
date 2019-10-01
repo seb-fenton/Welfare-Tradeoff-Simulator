@@ -10,7 +10,7 @@ Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy 
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
-0
+10
 Number of blues:
 0
 Number of greens:

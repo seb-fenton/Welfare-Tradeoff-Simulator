@@ -54,35 +54,64 @@ class BasicGraph():
             yValsPopBlack.append(self.results[x][1][config.colourMapping['black']])
 
 
-        plt.plot(xVals, yValsEnergyRed, color = 'r')
-        plt.plot(xVals, yValsEnergyBlue, color = 'b')
-        plt.plot(xVals, yValsEnergyGreen, color = 'g')
-        plt.plot(xVals, yValsEnergyPink, color = 'm')
-        plt.plot(xVals, yValsEnergyYellow, color = 'y')
-        plt.plot(xVals, yValsEnergyWhite, color = 'gray')
-        plt.plot(xVals, yValsEnergyBlack, color = 'k')
+        red, = plt.plot(xVals, yValsEnergyRed, color = 'r')
+        red.set_label('Selfish')
+
+        blue, = plt.plot(xVals, yValsEnergyBlue, color = 'b')
+        blue.set_label('Random')
+
+        green, = plt.plot(xVals, yValsEnergyGreen, color = 'g')
+        green.set_label('Reciprocal')
+
+        pink, = plt.plot(xVals, yValsEnergyPink, color = 'm')
+        pink.set_label('Selfless')
+        
+        yellow, = plt.plot(xVals, yValsEnergyYellow, color = 'y')
+        yellow.set_label('Kin-selective')
+
+        white, = plt.plot(xVals, yValsEnergyWhite, color = 'gray')
+        white.set_label('Previous action')
+
+        black, = plt.plot(xVals, yValsEnergyBlack, color = 'k')
 
         plt.title("Energy of Morphs by turn", fontsize=12)
         plt.xlabel("Turns", fontsize=12)
         plt.ylabel("Energy", fontsize=12)
         plt.tick_params(axis='both', which='major', labelsize=12)
+        plt.grid(True)
+        if(config.randomDistrib == 0): plt.legend()
 
         if(savePlots == 1): plt.savefig('plots/energy')
         plt.show()
 
-        plt.plot(xVals, yValsPopRed, color = 'r')
-        plt.plot(xVals, yValsPopBlue, color = 'b')
-        plt.plot(xVals, yValsPopGreen, color = 'g')
-        plt.plot(xVals, yValsPopPink, color = 'm')
-        plt.plot(xVals, yValsPopYellow, color = 'y')
-        plt.plot(xVals, yValsPopWhite, color = 'gray')
-        plt.plot(xVals, yValsPopBlack, color = 'k')
+        red, = plt.plot(xVals, yValsPopRed, color = 'r')
+        red.set_label('Selfish')
+
+        blue, = plt.plot(xVals, yValsPopBlue, color = 'b')
+        blue.set_label('Random')
+
+        green, = plt.plot(xVals, yValsPopGreen, color = 'g')
+        green.set_label('Reciprocal')
+
+        pink, = plt.plot(xVals, yValsPopPink, color = 'm')
+        pink.set_label('Selfless')
+        
+        yellow, = plt.plot(xVals, yValsPopYellow, color = 'y')
+        yellow.set_label('Kin-selective')
+
+        white, = plt.plot(xVals, yValsPopWhite, color = 'gray')
+        white.set_label('Previous action')
+
+        black, = plt.plot(xVals, yValsPopBlack, color = 'k')
 
         plt.title("Population of Morphs by turn", fontsize=12)
         plt.xlabel("Turns", fontsize=12)
         plt.ylabel("Population", fontsize=12)
         plt.tick_params(axis='both', which='major', labelsize=12)
-        
+        plt.grid(True)
+        if(config.randomDistrib == 0): plt.legend()
+
+       
         if(savePlots == 1): plt.savefig('plots/pop')
         plt.show()
 
