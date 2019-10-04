@@ -11,12 +11,13 @@ class GreenMorph(Morph):
         self.actionMemory = {}
 
     def makeChoice(self, target, config):
-        #REVISIT THIS LOGIC
-        if(len(self.actionMemory) == 0): return 0
+        if(len(self.actionMemory) == 0): 
+            return 1
         for i in range(0, len(self.actionMemory)-1):
             if target in self.actionMemory:
+                print("ho")
                 return self.actionMemory[target]
-        return random.randint(0,1)
+        return 1
 
     def rememberAction(self, target, action):
         self.actionMemory[target] = action

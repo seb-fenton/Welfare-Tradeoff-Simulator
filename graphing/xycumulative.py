@@ -4,11 +4,9 @@ class CumulativeGraph():
         self.results = []
         return
 
-    def addResults(self, results, index):
+    def addResults(self, results):
+        self.results.append(results)
         return
     
-    def plotResults(self):
-        return
-
-    def saveResults(self, directory):
+    def plotResults(self, savePlots, plotDirectory):
         return
