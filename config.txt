@@ -10,17 +10,17 @@ Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy 
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
-0
+100
 Number of blues:
-0
+100
 Number of greens:
 100
 Number of pinks:
-0
+100
 Number of yellows:
-0
+100
 Number of whites:
-0
+100
 Number of blacks:
 0
 Total games:
@@ -38,10 +38,10 @@ Save plots to directory? (1 for yes, 0 for no):
 Save plots to which directory?(not currently using this): 
 plots/
 Selfish reward:
-4
+3.75
 Selfless reward:
 8
 Distribute behaviours randomly across colours? (1 for yes, 0 for no):
-0
+1
 Probability of mutation (0-100):
-0
+5
