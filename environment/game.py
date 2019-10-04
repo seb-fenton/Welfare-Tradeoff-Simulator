@@ -70,16 +70,16 @@ class Game():
     def morphModification(self, config):
         #toggle guarantees no issues for odd population, just leaves first morph in list alone
         toggle = 0
-        if(config.totalPopulation % 2 == 1): toggle = 1
+        if(len(self.population) % 2 == 1): toggle = 1
 
         reproduction = []
         death = []
 
+        #TODO ISSUE HERE FOR ODD NUMBERS - MAKE THEM ALWAYS SELFISH
         for x in range(0, len(self.population)-toggle-1, 2):
             #choice
             #print("Start of Turn: \nActor: ", self.population[x].getColour(), "C ", self.population[x].getEnergy(), "H\n")
             #print("Actee: ", self.population[x+1].getColour(), "C ", self.population[x+1].getEnergy(), "\n")
-            print(x)
 
             choice = self.population[x].makeChoice(self.population[x+1], config)
             if(choice == 0): self.population[x].addEnergy(config.selfishReward)
@@ -113,6 +113,12 @@ class Game():
             self.population[0].removeEnergy(config.tax)
             if(self.population[0].checkChange() == 1): reproduction.append(0)
             elif(self.population[0].checkChange() == 2): death.append(0)
+        elif(toggle==1):
+            self.population[len(self.population)-1].addEnergy(config.selfishReward)
+            self.population[len(self.population)-1].addEnergy(config.selfishReward)
+            if(self.population[len(self.population)-1].checkChange() == 1): reproduction.append(0)
+            elif(self.population[len(self.population)-1].checkChange() == 2): death.append(0)
+
 
         
         self.consolate(reproduction, death, config)
