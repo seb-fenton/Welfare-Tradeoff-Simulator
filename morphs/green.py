@@ -15,7 +15,6 @@ class GreenMorph(Morph):
             return 1
         for i in range(0, len(self.actionMemory)-1):
             if target in self.actionMemory:
-                print("ho")
                 return self.actionMemory[target]
         return 1
 

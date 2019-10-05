@@ -68,7 +68,7 @@ class Game():
         return results
 
     def morphModification(self, config):
-        #toggle guarantees no issues for odd population, just leaves first morph in list alone
+        #toggle guarantees no issues for odd population, just leaves last morph in list alone
         toggle = 0
         if(len(self.population) % 2 == 1): toggle = 1
 

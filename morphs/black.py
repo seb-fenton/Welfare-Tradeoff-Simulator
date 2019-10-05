@@ -1,5 +1,6 @@
 from .morph import Morph
+import random
 
 class BlackMorph(Morph):
     def makeChoice(self, target, config):
-        return 0
+        return random.randint(0,1)
