@@ -19,20 +19,51 @@ def readToConfig(values):
         exit
 
     #If anyone has to work this out in the future I'm so sorry, everything is hardcoded to correspond to a certain line in the config.txt
-    fileList[4] = str(values[0]) + "\n"
-    fileList[6] = str(values[4]) + "\n"
-    fileList[8] = str(values[6]) + "\n"
-    fileList[40] = str(values[3]) + "\n"
-    fileList[42] = str(values[5]) + "\n"
+    #Hopefully the labels help a bit
 
-    #colour pops
-    fileList[12] 
+    ###GENERAL###
+
+    #Turns
+    fileList[4] = str(values[0]) + "\n"
+    #Starting Energy
+    fileList[6] = str(values[4]) + "\n"
+    #Tax
+    fileList[8] = str(values[6]) + "\n"
+    #Selfish reward
+    fileList[40] = str(values[3]) + "\n"
+    #Selfless reward
+    fileList[42] = str(values[5]) + "\n"
+    #Mutation probability
+    fileList[46] = str(values[7]) + "\n"
+
+    #Random Dist
+    if(values[10] == True): fileList[44] = "1\n"
+    else: fileList[44] = "0\n"
+    #Plot indiv
+    if(values[12] == True): fileList[32] = "1\n"
+    else: fileList[32] = "0\n"
+    #Save results
+    if(values[14] == True): fileList[36] = "1\n"
+    else: fileList[36] = "0\n"
+
+    ###POPS###
+
+    #Selfish Red
+    fileList[12] = str(values[18]) + "\n"
+    #Random Blue
+    fileList[14] = str(values[16]) + "\n"
+    #Reciprocal Green
+    fileList[16] = str(values[17]) + "\n"
+    #Selfless Pink
+    fileList[18] = str(values[19]) + "\n"
+    #Kin-selective Yellow
+    fileList[20] = str(values[20]) + "\n"
+    #Reactive White
+    fileList[22] = str(values[21]) + "\n"
 
     with open(fileName, 'w') as file:
         file.writelines(fileList)
 
-
-    
     return
 
 #sg.ChangeLookAndFeel('GreenTan')      
@@ -61,17 +92,17 @@ layout = [[sg.Text('Welfare Tradeoffs', font=('Helvetica', 16))],
            sg.In(default_text='0', size=(10, 1))],          
           [sg.Text('_'  * 100, size=(65, 1))],      
           [sg.Text('Toggles', font=('Helvetica', 15), justification='left')],      
-          [sg.Checkbox('Random Distribution', size=(12, 1), default=True), sg.Checkbox('Formidability', size=(20, 1))],      
-          [sg.Checkbox('Plot individual games', size=(12, 1)), sg.Checkbox('N/A', size=(20, 1), default=True)],      
+          [sg.Checkbox('Random Distribution', size=(12, 1), default=False), sg.Checkbox('Formidability', size=(20, 1))],      
+          [sg.Checkbox('Plot individual games', size=(12, 1), default=True), sg.Checkbox('N/A', size=(20, 1), default=True)],      
           [sg.Checkbox('Save results', default=True, size=(12, 1)), sg.Checkbox('N/A', size=(20, 1))],      
           [sg.Text('_'  * 100, size=(65, 1))],      
           [sg.Text('Starting Populations', font=('Helvetica', 15), justification='left')],      
-          [sg.Text('Random', size=(15, 1)), sg.In(default_text='1', size=(10, 1)),      
-           sg.Text('Reciprocal', size=(15, 1)), sg.In(default_text='1', size=(10, 1))],      
-          [sg.Text('Selfish', size=(15, 1)), sg.In(default_text='1', size=(10, 1)),
-           sg.Text('Selfless', size=(15, 1)), sg.In(default_text='1', size=(10, 1))],      
-          [sg.Text('Kin-selective', size=(15, 1)), sg.In(default_text='1', size=(10, 1)),      
-           sg.Text('Reactionary', size=(15, 1)), sg.In(default_text='1', size=(10, 1))],          
+          [sg.Text('Random', size=(15, 1)), sg.In(default_text='20', size=(10, 1)),      
+           sg.Text('Reciprocal', size=(15, 1)), sg.In(default_text='20', size=(10, 1))],      
+          [sg.Text('Selfish', size=(15, 1)), sg.In(default_text='20', size=(10, 1)),
+           sg.Text('Selfless', size=(15, 1)), sg.In(default_text='20', size=(10, 1))],      
+          [sg.Text('Kin-selective', size=(15, 1)), sg.In(default_text='20', size=(10, 1)),      
+           sg.Text('Reactionary', size=(15, 1)), sg.In(default_text='20', size=(10, 1))],          
           [sg.Submit(), sg.Cancel()]]      
 
 window = sg.Window('Welfare Tradeoffs', layout, font=("Helvetica", 12))

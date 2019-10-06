@@ -6,21 +6,21 @@ Starting total turns:
 Standard individual energy:
 8
 Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy will be taken per morph per turn):
-6
+4
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
-0
+20
 Number of blues:
-0
+20
 Number of greens:
-0
+20
 Number of pinks:
-0
+20
 Number of yellows:
-50
+20
 Number of whites:
-0
+20
 Number of blacks:
 0
 Total games:
@@ -40,8 +40,9 @@ plots/
 Selfish reward:
 4
 Selfless reward:
-4
+6
 Distribute behaviours randomly across colours? (1 for yes, 0 for no):
 0
 Probability of mutation (0-100):
-25
+0
+
