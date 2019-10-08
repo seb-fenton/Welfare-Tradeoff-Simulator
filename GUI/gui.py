@@ -36,31 +36,33 @@ def readToConfig(values):
     fileList[42] = str(values[5]) + "\n"
     #Mutation probability
     fileList[46] = str(values[7]) + "\n"
+    #Reproduction threshold
+    fileList[34] = str(values[8]) + "\n"
 
     #Random Dist
-    if(values[10] == True): fileList[44] = "1\n"
+    if(values[12] == True): fileList[44] = "1\n"
     else: fileList[44] = "0\n"
     #Plot indiv
-    if(values[12] == True): fileList[32] = "1\n"
+    if(values[14] == True): fileList[32] = "1\n"
     else: fileList[32] = "0\n"
     #Save results
-    if(values[14] == True): fileList[36] = "1\n"
+    if(values[16] == True): fileList[36] = "1\n"
     else: fileList[36] = "0\n"
 
     ###POPS###
 
     #Selfish Red
-    fileList[12] = str(values[18]) + "\n"
+    fileList[12] = str(values[20]) + "\n"
     #Random Blue
-    fileList[14] = str(values[16]) + "\n"
+    fileList[14] = str(values[18]) + "\n"
     #Reciprocal Green
-    fileList[16] = str(values[17]) + "\n"
+    fileList[16] = str(values[19]) + "\n"
     #Selfless Pink
-    fileList[18] = str(values[19]) + "\n"
+    fileList[18] = str(values[21]) + "\n"
     #Kin-selective Yellow
-    fileList[20] = str(values[20]) + "\n"
+    fileList[20] = str(values[22]) + "\n"
     #Reactive White
-    fileList[22] = str(values[21]) + "\n"
+    fileList[22] = str(values[23]) + "\n"
 
     with open(fileName, 'w') as file:
         file.writelines(fileList)
@@ -96,6 +98,8 @@ def readFromConfig():
     inputs['Selfless reward'] = fileList[42].rstrip()
     #Mutation probability
     inputs['Mutation probability'] = fileList[46].rstrip()
+    #Reproduction threshold
+    inputs['Reproduction threshold'] = fileList[34].rstrip()
 
     #Random Dist
     if(fileList[44].rstrip() == str(1)): inputs['Random distribution'] = True
@@ -146,6 +150,8 @@ def Gui(inputs):
             sg.In(default_text=inputs['Selfless reward'], size=(10, 1))],      
             [sg.Text('Tax', size=(15, 1)), sg.In(default_text=inputs['Tax'], size=(10, 1)), sg.Text('Mutation Probability', size=(15, 1)),      
             sg.In(default_text=inputs['Mutation probability'], size=(10, 1))],
+            [sg.Text('Reproduction threshold', size=(15, 1)), sg.In(default_text=inputs['Reproduction threshold'], size=(10, 1)), sg.Text('Placeholder', size=(15, 1)),      
+            sg.In(default_text=0, size=(10, 1))],
             [sg.Text('_'  * 100, size=(65, 1))], 
             [sg.Text('Multi-game options',font=('Helvetica', 15), justification='left')],
             [sg.Text('Pop. Increment', size=(15, 1)), sg.In(default_text='0', size=(10, 1)), sg.Text('Turn Increment', size=(15, 1)),      

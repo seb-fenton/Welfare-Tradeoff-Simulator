@@ -126,8 +126,6 @@ class BasicGraph():
         startingPop = config.redPop + config.bluePop + config.greenPop + config.yellowPop + config.pinkPop + config.whitePop + config.blackPop
         totalPop = yValsPopBlue[-1] + yValsPopGreen[-1] + yValsPopRed[-1] + yValsPopYellow[-1] + yValsPopPink[-1] + yValsPopWhite[-1]
         if(totalPop >= 100*startingPop): plt.yscale('log')
-        print(totalPop)
-        print(startingPop)
         if(savePlots == 1): plt.savefig('plots/pop')
         plt.show()
 
