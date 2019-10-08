@@ -6,6 +6,9 @@ class BasicGraph():
         return
     
     def plotResults(self, config, savePlots, plotDirectory):
+
+        ###START TO BREAKDOWN STATS FROM RESULTS###
+
         xVals = []
 
         yValsEnergyRed = []
@@ -54,6 +57,9 @@ class BasicGraph():
             yValsPopBlack.append(self.results[x][1][config.colourMapping['black']])
 
 
+
+        ###ENERGY###
+
         red, = plt.plot(xVals, yValsEnergyRed, color = 'r')
         red.set_label('Selfish')
 
@@ -81,8 +87,13 @@ class BasicGraph():
         plt.grid(True)
         if(config.randomDistrib == 0): plt.legend()
 
+        #Save and show
         if(savePlots == 1): plt.savefig('plots/energy')
         plt.show()
+
+
+
+        ###POPULATION###
 
         red, = plt.plot(xVals, yValsPopRed, color = 'r')
         red.set_label('Selfish')
@@ -111,7 +122,12 @@ class BasicGraph():
         plt.grid(True)
         if(config.randomDistrib == 0): plt.legend()
 
-       
+        #Logarithmic check
+        startingPop = config.redPop + config.bluePop + config.greenPop + config.yellowPop + config.pinkPop + config.whitePop + config.blackPop
+        totalPop = yValsPopBlue[-1] + yValsPopGreen[-1] + yValsPopRed[-1] + yValsPopYellow[-1] + yValsPopPink[-1] + yValsPopWhite[-1]
+        if(totalPop >= 100*startingPop): plt.yscale('log')
+        print(totalPop)
+        print(startingPop)
         if(savePlots == 1): plt.savefig('plots/pop')
         plt.show()
 
