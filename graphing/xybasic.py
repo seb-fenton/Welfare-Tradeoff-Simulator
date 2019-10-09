@@ -122,6 +122,9 @@ class BasicGraph():
         plt.grid(True)
         if(config.randomDistrib == 0): plt.legend()
 
+        #print("###CONFIG###")
+        #config.prettyPrint()
+
         #Logarithmic check
         startingPop = config.redPop + config.bluePop + config.greenPop + config.yellowPop + config.pinkPop + config.whitePop + config.blackPop
         totalPop = yValsPopBlue[-1] + yValsPopGreen[-1] + yValsPopRed[-1] + yValsPopYellow[-1] + yValsPopPink[-1] + yValsPopWhite[-1]

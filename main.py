@@ -35,6 +35,8 @@ def main():
         print("\nIssue with config file. Exiting program... \n")
         exit
     
+    cumulative = CumulativeGraph()
+
     for x in range(1, metaconfig.totalGames+1):
         population = []
         game = Game(config, 0, population)
@@ -46,11 +48,13 @@ def main():
             graph.plotResults(config, metaconfig.savePlots, metaconfig.plotDirectory)
 
         if metaconfig.totalGames > 1:
-            #cumulative.addGame(results, x)
+            cumulative.addGame(results)
             updateConfig(config, metaconfig)
     
-    #cumulative.plotResults()
-    #if(metaconfig.savePlots == 1): cumulative.saveResults(metaconfig.plotDirectory)
+    if metaconfig.totalGames > 1: 
+        if  int(metaconfig.mergeCumulative, 10) == 1: 
+            cumulative.plotMergedResults(metaconfig.plotIndiv, metaconfig.plotDirectory, config)
+    if(metaconfig.savePlots == 1): cumulative.saveResults(metaconfig.plotDirectory)
     print("\nExecution succesful. Deallocating memory and exiting program...\n")
 
 #defined as separate function for clarity in case of extension

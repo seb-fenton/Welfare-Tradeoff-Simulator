@@ -2,15 +2,15 @@ Welcome to the configuration file for the Welfare Tradeoff Simulator. Please onl
 Starting total population (irrelevant at the moment):
 100
 Starting total turns:
-25
+100
 Standard individual energy:
 12
 Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy will be taken per morph per turn):
-4
+3.8
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
-0
+20
 Number of blues:
 20
 Number of greens:
@@ -24,15 +24,15 @@ Number of whites:
 Number of blacks:
 0
 Total games:
-1
-Population increment per game:
-25
-Turns increment per game:
 10
+Population increment per game:
+0
+Turns increment per game:
+0
 Plot individual games? (1 for yes, 0 for no):
 1
 Standard reproduction threshold:
-32
+24
 Save plots to directory? (1 for yes, 0 for no):
 0
 Save plots to which directory?(not currently using this): 
@@ -40,9 +40,11 @@ plots/
 Selfish reward:
 4
 Selfless reward:
-24
+6
 Distribute behaviours randomly across colours? (1 for yes, 0 for no):
 0
 Probability of mutation (0-100):
 0
+Merge cumulative results?:
+1
 

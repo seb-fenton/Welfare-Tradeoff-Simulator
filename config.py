@@ -66,3 +66,5 @@ class MetaConfig():
         self.savePlots = int(fileList[36].rstrip(), 10)
 
         self.plotDirectory = fileList[38].rstrip()
+
+        self.mergeCumulative = fileList[48].rstrip()

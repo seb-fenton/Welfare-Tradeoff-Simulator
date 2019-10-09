@@ -21,6 +21,7 @@ def readToConfig(values):
 
     #If anyone has to work this out in the future I'm so sorry, everything is hardcoded to correspond to a certain line in the config.txt
     #Hopefully the labels help a bit
+    #Also adding new GUI elements is an absolute nightmare, try to avoid it
 
     ###GENERAL###
 
@@ -39,6 +40,19 @@ def readToConfig(values):
     #Reproduction threshold
     fileList[34] = str(values[8]) + "\n"
 
+
+    ###MULTIGAME###
+    
+    #Total games
+    fileList[26] = str(values[1]) + "\n"
+    #Population increment
+    fileList[28] = str(values[10]) + "\n"
+    #Turns increment
+    fileList[30] = str(values[11]) + "\n"
+
+
+    ###CHECKBOXES###
+
     #Random Dist
     if(values[12] == True): fileList[44] = "1\n"
     else: fileList[44] = "0\n"
@@ -48,6 +62,7 @@ def readToConfig(values):
     #Save results
     if(values[16] == True): fileList[36] = "1\n"
     else: fileList[36] = "0\n"
+
 
     ###POPS###
 
@@ -101,6 +116,19 @@ def readFromConfig():
     #Reproduction threshold
     inputs['Reproduction threshold'] = fileList[34].rstrip()
 
+    
+    ###MULTIGAME###
+
+    #Total games
+    inputs['Total games'] = fileList[26].rstrip()
+    #Population increment
+    inputs['Population increment'] = fileList[28].rstrip()
+    #Turns increment
+    inputs['Turns increment'] = fileList[30].rstrip()
+
+
+    ###CHECKBOXES###
+
     #Random Dist
     if(fileList[44].rstrip() == str(1)): inputs['Random distribution'] = True
     else: inputs['Random distribution'] = False
@@ -110,6 +138,7 @@ def readFromConfig():
     #Save results
     if(fileList[36].rstrip() == str(1)): inputs['Save results'] = True
     else: inputs['Save results'] = False
+
 
     ###POPS###
 
@@ -143,7 +172,7 @@ def Gui(inputs):
 
     layout = [[sg.Text('Welfare Tradeoffs', font=('Helvetica', 16))],      
             [sg.Text('Turns', size=(15, 1)), sg.Spin(values=[i for i in range(1, 1000)], initial_value=inputs['Turns'], size=(6, 1)),      
-            sg.Text('Games', size=(18, 1)), sg.Spin(values=[i for i in range(1, 1000)], initial_value=1, size=(6, 1))],      
+            sg.Text('Games', size=(18, 1)), sg.Spin(values=[i for i in range(1, 1000)], initial_value=inputs['Total games'], size=(6, 1))],      
             [sg.Text('Input Folder', size=(15, 1)), sg.In(default_text='config.txt', size=(10, 1)), sg.Text('Selfish Reward', size=(15, 1)),      
             sg.In(default_text=inputs['Selfish reward'], size=(10, 1))],      
             [sg.Text('Starting Energy', size=(15, 1)), sg.In(default_text=inputs['Starting energy'], size=(10, 1)), sg.Text('Selfless Reward', size=(15, 1)),      
@@ -154,8 +183,8 @@ def Gui(inputs):
             sg.In(default_text=0, size=(10, 1))],
             [sg.Text('_'  * 100, size=(65, 1))], 
             [sg.Text('Multi-game options',font=('Helvetica', 15), justification='left')],
-            [sg.Text('Pop. Increment', size=(15, 1)), sg.In(default_text='0', size=(10, 1)), sg.Text('Turn Increment', size=(15, 1)),      
-            sg.In(default_text='0', size=(10, 1))],          
+            [sg.Text('Pop. Increment', size=(15, 1)), sg.In(default_text=inputs['Population increment'], size=(10, 1)), sg.Text('Turn Increment', size=(15, 1)),      
+            sg.In(default_text=inputs['Turns increment'], size=(10, 1))],          
             [sg.Text('_'  * 100, size=(65, 1))],      
             [sg.Text('Toggles', font=('Helvetica', 15), justification='left')],      
             [sg.Checkbox('Random Distribution', size=(12, 1), default=inputs['Random distribution']), sg.Checkbox('Formidability', size=(20, 1))],      
