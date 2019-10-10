@@ -6,7 +6,7 @@ Starting total turns:
 Standard individual energy:
 12
 Standard tax per turns (applied as a negative modifier i.e. "+4" means 4 energy will be taken per morph per turn):
-3.8
+4
 Take formidability into account? (1 for yes, 0 for no):
 0
 Number of reds:
@@ -24,13 +24,13 @@ Number of whites:
 Number of blacks:
 0
 Total games:
-10
+15
 Population increment per game:
 0
 Turns increment per game:
 0
 Plot individual games? (1 for yes, 0 for no):
-1
+0
 Standard reproduction threshold:
 24
 Save plots to directory? (1 for yes, 0 for no):
@@ -40,7 +40,7 @@ plots/
 Selfish reward:
 4
 Selfless reward:
-6
+12
 Distribute behaviours randomly across colours? (1 for yes, 0 for no):
 0
 Probability of mutation (0-100):

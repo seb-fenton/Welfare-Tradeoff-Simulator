@@ -27,6 +27,8 @@ PySimpleGui
 
 Install python3.
 
+Run 'make init' to install prerequisites.
+
 ## Running the program
 
 If you want to interface with the program using the GUI, run:
