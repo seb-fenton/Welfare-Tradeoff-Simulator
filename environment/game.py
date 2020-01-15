@@ -13,6 +13,9 @@ class Game():
     def __init__(self, config, uniqueId, population):
         self.uniqueId = uniqueId
         self.population = population
+        self.deadList = []
+        self.greenPopulation = []
+        self.tempGreenPopulation = []
 
     #this is a separate function because it was shitting itself & I'm not a good enough python coder to bother working out what was going wrong
     def initialMorphGen(self, config):
@@ -63,8 +66,11 @@ class Game():
         for x in range(1,config.totalTurns):
             print("Turn: ", x)
             random.shuffle(self.population)
+            self.handleGreens(config)
             self.morphModification(config)
             results.append(self.generateStats(config))
+            self.greenPopulation = []
+            self.tempGreenPopulation = []
         return results
 
     def morphModification(self, config):
@@ -132,6 +138,7 @@ class Game():
 
         #goes backwards so that indices don't screw up
         for x in sorted(death, reverse=True):
+            self.deadList.append(self.population[x].uniqueId)
             del self.population[x]
 
         return
@@ -185,7 +192,56 @@ class Game():
     def idGen(self):
         self.uniqueId += 1
         return self.uniqueId
+
+    def isAlive(self, uniqueId):
+        for morph in self.deadList:
+            if morph == uniqueId: return False
+        return True
         
 
 
-    
+
+    def handleGreens(self, config):
+        #generate pairs
+        lockList = [] #reserves morphs so that they don't get selected multiple times
+        for morph in self.population:
+            if(morph.colourId == config.colourMapping['green']):
+                #TODO(seb): let gui modify gmrc
+                if (random.random() < config.gmrc): continue
+                for pair in morph.actionMemory:
+                    if self.isAlive(pair) and pair not in lockList: 
+                        self.greenPopulation.append([morph.uniqueId, pair])
+                        lockList.append(pair)
+                        lockList.append(morph.uniqueId)
+        
+        #generate list of morphs to delete and create a temp list of saved greens
+        deleteList = []
+        for morph in self.population: 
+            for uniqueIdPair in self.greenPopulation:
+                if(morph.uniqueId == (uniqueIdPair[0] or uniqueIdPair[1])):
+                    self.tempGreenPopulation.append(morph)
+                    deleteList.append(morph.uniqueId)
+        #remove paired morphs from main list
+        for morph in self.population:
+            if morph.uniqueId in deleteList: del morph
+        
+        tempTempMorphHolder = []
+        #sort the temp green list into its pairs
+        for morph in self.tempGreenPopulation:
+            for pair in self.greenPopulation:
+                if morph.uniqueId == pair[0]:
+                    for pairmorph in self.tempGreenPopulation:
+                        if pairmorph.uniqueId == pair[1]:
+                            tempTempMorphHolder.append(morph)
+                            tempTempMorphHolder.append(pairmorph)
+                elif morph.uniqueId == pair[1]:
+                    for pairmorph in self.tempGreenPopulation:
+                        if pairmorph.uniqueId == pair[0]:
+                            tempTempMorphHolder.append(pairmorph)
+                            tempTempMorphHolder.append(morph) 
+        print(self.greenPopulation)
+        print(tempTempMorphHolder)
+
+        #append the pairs to the original population list
+        for morph in tempTempMorphHolder:
+            self.population.append(morph)
